@@ -25,13 +25,7 @@ public class MoneyTriggerHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Trap"))
-        {
-            Money money = GetComponent<Money>();
-            
-            _stackHandler.TrapPoppingMoney(money);
-           
-        }
+      HandleTrap(other);
     }
 
     #endregion
@@ -40,5 +34,19 @@ public class MoneyTriggerHandler : MonoBehaviour
     #endregion
     
     #region PrivateMethods
+    /// <summary>
+    /// Handles the trap trigger events
+    /// </summary>
+    /// <param name="other">Trap or other</param>
+    void HandleTrap(Collider other)
+    {
+        if (other.CompareTag("Trap"))
+        {
+            Money money = GetComponent<Money>();
+            
+            _stackHandler.TrapPoppingMoney(money);
+           
+        } 
+    }
     #endregion
 }
