@@ -81,7 +81,31 @@ public class StackHandler : MonoBehaviour
     #endregion
     
     #region PublicMethods
+    
+    /// <summary>
+    /// Pop money stack until this money (including this)
+    /// Used on money trigger handler to handle stack decreasing
+    /// </summary>
+    /// <param name="money">Money to reach</param>
+    public void TrapPoppingMoney(Money money)
+    {
+        int countToThis = 0;
+        foreach (Money mny in _moniesOnPlayer)
+        {
+            countToThis++;
+           if (money == mny)
+           {
+               break;
+           }
+        }
 
+        for (int i = 0; i < countToThis; i++)
+        {
+            _moniesOnPlayer.Pop();
+            MakeSmallerCollider();
+        }
+        
+    }
     #endregion
     
     #region PrivateMethods
@@ -176,6 +200,26 @@ public class StackHandler : MonoBehaviour
         //Change collider center to backward to make equal player size
         playerCollider.center = new Vector3(playerCollider.center.x, playerCollider.center.y,
             playerCollider.center.z + (_moneyZScale / 2f));
+    }   
+    
+    /// <summary>
+    /// Called when stack decreased, collider gets small
+    /// </summary>
+    void MakeSmallerCollider()
+    {
+        //Make collider move to back
+        _playerCollider.localPosition = new Vector3(_playerCollider.localPosition.x, _playerCollider.localPosition.y,
+            _nextZ-_moneyZScale);
+        
+        //Get Collider component
+        BoxCollider playerCollider = _playerCollider.GetComponent<BoxCollider>();
+        
+        //Make collider smaller with money scale
+        playerCollider.size = new Vector3(playerCollider.size.x, playerCollider.size.y, playerCollider.size.z - _moneyZScale);
+        
+        //Change collider center to forward to make equal player size
+        playerCollider.center = new Vector3(playerCollider.center.x, playerCollider.center.y,
+            playerCollider.center.z - (_moneyZScale / 4f));
     }
     
     /// <summary>

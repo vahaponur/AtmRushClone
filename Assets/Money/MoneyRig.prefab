@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 257891515335551104}
   - component: {fileID: 4564378102741585386}
   - component: {fileID: 2898424375188373065}
+  - component: {fileID: 7966320143004865063}
   m_Layer: 0
   m_Name: MoneyRig
   m_TagString: Untagged
@@ -137,5 +138,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b93962a63bc9804ea090dc86e214cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7966320143004865063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4948887158016723219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce9af2968e32114fb55483dd21c5f79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
