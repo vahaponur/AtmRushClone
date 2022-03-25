@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3325397376200107328}
   m_Layer: 0
   m_Name: PlayerMesh
-  m_TagString: Untagged
+  m_TagString: PlayerMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3325397376200107333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 3325397376399836332}
   m_RootOrder: 0
@@ -106,13 +106,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3325397376332095173}
-  m_LocalRotation: {x: 0.06514532, y: -0, z: -0, w: 0.9978758}
-  m_LocalPosition: {x: 0, y: 7.75, z: -10}
+  m_LocalRotation: {x: 0.09439283, y: -0, z: -0, w: 0.9955351}
+  m_LocalPosition: {x: 0, y: 6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3325397376399836332}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 7.47, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.833, y: 0, z: 0}
 --- !u!20 &3325397376332095175
 Camera:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _xClamp: 4.5
-  _horizontalSpeed: 10
+  _horizontalSpeed: 30
   _forwardSpeed: 10
 --- !u!54 &1031239448
 Rigidbody:
@@ -286,5 +286,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9194508, z: 1}
-  m_Center: {x: 0, y: 1.5800834, z: 0}
+  m_Size: {x: 1, y: 1.9194508, z: 1.0188174}
+  m_Center: {x: 0, y: 1.5800834, z: -0.0047044754}

@@ -65,11 +65,6 @@ public class StackHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        foreach (Money money in _moniesOnPlayer)
-        {
-            StartCoroutine(AnimateMoney(money));
-        }
-        
         ProcessMoneyCollision(other);
     }
 
@@ -99,10 +94,17 @@ public class StackHandler : MonoBehaviour
            }
         }
 
+        GameObject[] moneiesToDestroy = new GameObject[countToThis];
         for (int i = 0; i < countToThis; i++)
         {
-            _moniesOnPlayer.Pop();
+            var moneyToDestroy =_moniesOnPlayer.Pop();
+            moneiesToDestroy[i] = moneyToDestroy.gameObject;
             MakeSmallerCollider();
+        }
+
+        foreach (var moneyToDest in moneiesToDestroy )
+        {
+            Destroy(moneyToDest);
         }
         
     }
@@ -128,6 +130,10 @@ public class StackHandler : MonoBehaviour
             
             money.transform.position = NewEnterancePosition();
             ControlMoneyMovement();
+            foreach (Money mooney in _moniesOnPlayer)
+            {
+                StartCoroutine(AnimateMoney(mooney));
+            }
             
         }
         
@@ -187,9 +193,6 @@ public class StackHandler : MonoBehaviour
     /// </summary>
     void MakeBiggerCollider()
     {
-        //Make collider move to front
-        _playerCollider.localPosition = new Vector3(_playerCollider.localPosition.x, _playerCollider.localPosition.y,
-            _nextZ+_moneyZScale);
         
         //Get Collider component
         BoxCollider playerCollider = _playerCollider.GetComponent<BoxCollider>();
@@ -199,7 +202,7 @@ public class StackHandler : MonoBehaviour
         
         //Change collider center to backward to make equal player size
         playerCollider.center = new Vector3(playerCollider.center.x, playerCollider.center.y,
-            playerCollider.center.z + (_moneyZScale / 2f));
+            playerCollider.center.z+ _moneyZScale*0.5f );
     }   
     
     /// <summary>
@@ -207,10 +210,7 @@ public class StackHandler : MonoBehaviour
     /// </summary>
     void MakeSmallerCollider()
     {
-        //Make collider move to back
-        _playerCollider.localPosition = new Vector3(_playerCollider.localPosition.x, _playerCollider.localPosition.y,
-            _nextZ-_moneyZScale);
-        
+       
         //Get Collider component
         BoxCollider playerCollider = _playerCollider.GetComponent<BoxCollider>();
         
@@ -219,7 +219,7 @@ public class StackHandler : MonoBehaviour
         
         //Change collider center to forward to make equal player size
         playerCollider.center = new Vector3(playerCollider.center.x, playerCollider.center.y,
-            playerCollider.center.z - (_moneyZScale / 4f));
+            playerCollider.center.z - (_moneyZScale*0.5f ));
     }
     
     /// <summary>
@@ -243,23 +243,29 @@ public class StackHandler : MonoBehaviour
     /// <returns>End of frame</returns>
     IEnumerator AnimateMoney(Money money)
     {
-       
-        var dTime = 0f;
-        while (dTime<0.2f)
+        var abrack = money.transform != null;
+        Debug.Log(abrack);
+        if (abrack)
         {
-            dTime += Time.deltaTime;
-            money.transform.localScale += new Vector3(1, 0, 1) * Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+            var dTime = 0f;
+            while (dTime<0.2f && abrack)
+            {
+                dTime += Time.deltaTime;
+                money.transform.localScale += new Vector3(1, 0, 1) * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
 
-        dTime = 0f;
-        while (dTime<0.2f)
-        {
-            dTime += Time.deltaTime;
-            money.transform.localScale -= new Vector3(1, 0, 1) * Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            dTime = 0f;
+            while (dTime<0.2f && money.transform != null)
+            {
+                dTime += Time.deltaTime;
+                money.transform.localScale -= new Vector3(1, 0, 1) * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            money.transform.localScale = _defaultMoneyScale;
         }
-        money.transform.localScale = _defaultMoneyScale;
+        
+       
     }
     
     
